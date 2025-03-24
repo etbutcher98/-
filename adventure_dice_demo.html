@@ -1,0 +1,103 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <title>冒險者 渝絜的探險之旅</title>
+    <style>
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            text-align: center;
+            background-color: #1e1e1e;
+            color: #fff;
+            padding-top: 80px;
+        }
+        #intro {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        #confirm-section {
+            margin-bottom: 40px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            background-color: #444;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #dice-section {
+            display: none;
+        }
+        #dice {
+            width: 120px;
+            height: 120px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+        #result {
+            font-size: 20px;
+            margin-top: 30px;
+            max-width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <div id="intro">歡迎冒險者：渝絜<br>你即將踏上一段未知的城市邊界探索之旅。</div>
+    <div id="confirm-section">
+        <p>你願意加入這場冒險嗎？</p>
+        <button onclick="startAdventure()">是，我加入冒險</button>
+        <button onclick="denyAdventure()">否，我選擇離開</button>
+    </div>
+
+    <div id="dice-section">
+        <p>點擊骰子來決定你的下一站與任務：</p>
+        <img id="dice" src="https://upload.wikimedia.org/wikipedia/commons/3/3c/6sided_dice.png" alt="骰子" onclick="rollDice()">
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const locations = [
+            {
+                name: "紙箱王遺址",
+                task: "探索廢墟並尋找一個被自然吞沒的結構，拍照記錄。",
+                howto: "導航至大肚紙箱王遺址舊址，騎車至產業道路末端可見圍牆缺口，進入後沿藤蔓建築前行約50公尺可見主建物入口。"
+            },
+            {
+                name: "麗水漁港防空洞",
+                task: "找到入口並進入防空洞，錄下其中聲音10秒。",
+                howto: "導航至麗水國小，往海邊方向直走至堤岸，靠近防風林的鐵皮屋旁停車，穿越小徑進入沙灘後沿岸走約100公尺會看到水泥圓形洞口。"
+            },
+            {
+                name: "大肚山風切草原",
+                task: "站在風口草原最高點，拍一張吹起頭髮的剪影照。",
+                howto: "從沙鹿市區往大肚山方向，行至最高點風車下方小徑停車，步行上坡至邊緣台地，見大片矮草與強風即為目的地。"
+            }
+        ];
+
+        function startAdventure() {
+            document.getElementById("confirm-section").style.display = "none";
+            document.getElementById("dice-section").style.display = "block";
+        }
+
+        function denyAdventure() {
+            document.getElementById("intro").innerHTML = "你選擇離開，但冒險已悄悄開始…";
+            document.getElementById("confirm-section").style.display = "none";
+        }
+
+        function rollDice() {
+            const choice = locations[Math.floor(Math.random() * locations.length)];
+            document.getElementById("result").innerHTML = `
+                <h2>${choice.name}</h2>
+                <p><strong>任務：</strong>${choice.task}</p>
+                <p><strong>怎麼去：</strong>${choice.howto}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
